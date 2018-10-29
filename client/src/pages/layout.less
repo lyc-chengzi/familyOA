@@ -1,0 +1,47 @@
+div{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    margin:0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+:global(#root){
+    height: 100%;
+    overflow: hidden;
+}
+
+:global(#first){
+    background: url('../assets/2.jpg');
+}
+.box{height: 100%; overflow: hidden;}
+.cc{color: red;}
+
+.logo{
+    height: 64px;
+    background: rgba(255, 255, 255, .2);
+}
+
+.content{
+    height: 100%;
+    margin: 0 16px;
+}
+
+:global(#layout_tabs .ant-tabs-content){
+    flex: 1;
+    background-color: #fff;
+    padding: 10px;
+}
+
+:global(#layout_tabs .ant-tabs-bar){
+    border: 0 !important;
+}
+
+:global(.ant-menu .ant-menu-submenu-title){
+    font-weight: 600;
+}
