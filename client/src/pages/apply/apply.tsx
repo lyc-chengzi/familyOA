@@ -11,7 +11,7 @@ export default class ApplyPage extends Base<IApplyPage> {
         super(props);
     }
 
-    render() {
+    public render() {
         return (
             <div>记账页面</div>
         );

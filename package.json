@@ -38,6 +38,7 @@
     "less-loader": "^4.1.0",
     "postcss-loader": "^3.0.0",
     "postcss-modules": "^1.4.1",
+    "pre-commit": "^1.2.2",
     "precss": "^3.1.2",
     "pug": "^2.0.3",
     "pug-html-loader": "^1.1.5",
@@ -60,8 +61,10 @@
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tslintinit": "tslint --init"
+    "tslintinit": "tslint --init",
+    "tslint": "tslint -c tslint.json 'client/src/**/*.tsx'"
   },
+  "pre-commit": ["tslint"],
   "keywords": [
     "family"
   ],

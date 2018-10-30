@@ -38,14 +38,14 @@ class App extends React.Component<any, any> {
         super(props);
     }
 
-    state = {
+    public state = {
         collapsed: false,
         tabs: tabs,
         activeTabKey: routes[0].key,
         selectedMenuKeys: [routes[0].key]
     };
 
-    render() {
+    public render() {
         return (
             <LocaleProvider locale={zh_CN}>
                 <Layout style={{height: '100%'}}>
@@ -92,7 +92,7 @@ class App extends React.Component<any, any> {
         );
     }
 
-    onCollapse = (collapsed: boolean) => {
+    public onCollapse = (collapsed: boolean) => {
         this.setState({ collapsed });
     };
 
@@ -100,20 +100,20 @@ class App extends React.Component<any, any> {
      * 页面选项卡切换事件
      * @param key
      */
-    pageChanged = (key: string) => {
+    public pageChanged = (key: string) => {
         this.setState({
             activeTabKey: key,
             selectedMenuKeys: [key]
         });
     };
 
-    closeMenuTab = (targetKey: any, action: any) => {
+    public closeMenuTab = (targetKey: any, action: any) => {
         if(action === 'remove'){
             this.removeTab(targetKey);
         }
     };
 
-    removeTab = (targetKey: any) => {
+    public removeTab = (targetKey: any) => {
         let activeKey = this.state.activeTabKey;
         let lastIndex = 0;
         this.state.tabs.forEach((pane, i) => {
@@ -126,26 +126,26 @@ class App extends React.Component<any, any> {
             activeKey = panes[lastIndex].key;
         }
         this.setState({ tabs: panes, activeTabKey: activeKey, selectedMenuKeys: [activeKey] });
-    }
+    };
 
     /**
      * 菜单跳转加载
      * @param params
      */
-    menuClick = (params: any): void => {
+    public menuClick = (params: any): void => {
         const {item, key} = params;
         const {tabs} = this.state;
         console.log(item, key);
         const results = tabs.filter(c=>c.key === key);
 
-        //如果菜单已经打开
-        if(results && results.length == 1){
+        // 如果菜单已经打开
+        if(results && results.length === 1){
             this.setState({
                 activeTabKey: key,
                 selectedMenuKeys: [key]
             });
         }
-        //如果菜单还没打开
+        // 如果菜单还没打开
         else{
             const route = item.props.item;
             tabs.push(route);

@@ -9,7 +9,7 @@ export interface IDemo extends IBase{
 }
 
 export default class Demo extends Base<IDemo>{
-    render(){
+    public render(){
         return (
             <div>{this.props.name}</div>
         );

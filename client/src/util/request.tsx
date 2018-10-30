@@ -26,12 +26,11 @@ function checkStatus(response:any) {
  */
 export default function request(url:string, options:any) {
     let nOptions = options || {}, headers = nOptions.headers || {};
-    const nHeaders = {
+    nOptions.headers = {
         ...headers,
         "userID": localStorage.getItem('userID'),
         "token" : localStorage.getItem('token')
     };
-    nOptions.headers = nHeaders;
     return fetch(url, nOptions)
         .then(checkStatus)
         .then(parseJSON)
@@ -45,24 +44,23 @@ export interface IrequestAsyncResult {
     msg: '',
     body: any,
     headers: any,
-    error: Error | null
+    error: Error | undefined
 }
 
 export async function requestAsync(url:string, options?:any){
     let nOptions = options || {}, headers = nOptions.headers || {};
-    const nHeaders = {
+    nOptions.headers = {
         ...headers,
         "userID": localStorage.getItem('userID'),
         "token" : localStorage.getItem('token')
     };
-    nOptions.headers = nHeaders;
 
-    let result: IrequestAsyncResult = {success: false, status: '500', msg: '', body: null, headers: null, error: null};
+    let result: IrequestAsyncResult = {success: false, status: '500', msg: '', body: undefined, headers: undefined, error: undefined};
 
     try{
         const response = await fetch(url, nOptions);
         let r = checkStatus(response);
-        if(r && r.status == 200){
+        if(r && r.status === 200){
             const body = await r.json();
             const headers = r.headers;
             result.status = r.status;
@@ -88,9 +86,13 @@ export async function requestAsync(url:string, options?:any){
  * @returns {string}
  */
 export const parseUrlParmas = (urlParams: any) => {
-    if(!urlParams || (typeof urlParams !== 'object')) return '';
+    if(!urlParams || (typeof urlParams !== 'object')) {
+        return '';
+    }
     const keys = Object.keys(urlParams);
-    if(keys.length == 0) return '';
+    if(keys.length === 0){
+        return '';
+    }
 
     let result = '';
     keys.forEach(key => {

@@ -23,19 +23,19 @@ let queryJSON: IQueryJson = {
 };
 
 class SearchForm extends React.Component<any> {
-    handleSearch = (e:any) => {
+    public handleSearch = (e:any) => {
         e.preventDefault();
         this.props.form.validateFields((err: any, values: any[]) => {
             this.props.SearchCallback(values);
         });
     };
 
-    handleReset = () => {
+    public handleReset = () => {
         this.props.form.resetFields();
     };
 
     // To generate mock Form.Item
-    render() {
+    public render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form
@@ -71,7 +71,7 @@ class SearchForm extends React.Component<any> {
 
 const WrappedSearchForm = Form.create()(SearchForm);
 
-export interface IApplyList extends IBase{
+interface IApplyList extends IBase{
 
 }
 
@@ -89,7 +89,7 @@ export default class ApplyList extends Base<IApplyList>{
         };
     }
 
-    column: object[] = [
+    public column: object[] = [
         {dataIndex: 'applyDate', title: '记账日期'},
         {dataIndex: 'userName', title: '用户'},
         {dataIndex: 'amomey', title: '金额'},
@@ -97,7 +97,7 @@ export default class ApplyList extends Base<IApplyList>{
         {dataIndex: 'addDate', title: '添加日期'},
     ];
 
-    render() {
+    public render() {
         return (
             <div>
                 <WrappedSearchForm SearchCallback={this.searchHandler}/>
@@ -128,16 +128,16 @@ export default class ApplyList extends Base<IApplyList>{
         );
     }
 
-    query = async (page: number, pageSize: number = 10) => {
+    public query = async (page: number, pageSize: number = 10) => {
         const response = await service.getApplyMainList({userID: '13',page, pageSize, ...queryJSON});
         console.log(response);
     };
 
-    pageChange = (page: number) => {
+    public pageChange = (page: number) => {
         console.log(page);
     };
 
-    searchHandler = (values: any) => {
+    public searchHandler = (values: any) => {
         const queryJson = {
             startTime: values.startTime ? moment(values.startTime).format('YYYY-MM-DD') : '',
             endTime: values.endTime ? moment(values.endTime).format('YYYY-MM-DD') : '',
